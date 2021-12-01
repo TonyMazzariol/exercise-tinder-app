@@ -1,14 +1,11 @@
 var colors = require('colors');
 const people = require('./people');
 const tr = require('./trinker');
-const br = require('./test');
 
 console.log(tr.title());
 console.log("Model des données : ");
 console.log(people[0]);
 console.log(tr.line('LEVEL 1'));
-
-console.log(" test : ", br.test(people));
 
 console.log("Nombre d'hommes : ",                                                                   tr.nbOfMale(people));
 console.log("Nombre de femmes : ",                                                                  tr.nbOfFemale(people));

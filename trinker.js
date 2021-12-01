@@ -112,22 +112,19 @@ $$$$$$$$\\        $$\\           $$\\                           $$\\
         let total = 0
         p.forEach(element => {
             total = total + parseFloat(element.income.substring(1))
-            
         });
         return ((total/p.length).toFixed(2)+ " $").yellow
     },
 
     medianSalary: function(p){
-        let median = 0
         p = p.sort((a, b) => parseFloat(b.income.substring(1)) - parseFloat(a.income.substring(1)));
         if (p.length % 2 == 0) {
             //pair
-            median = ( parseFloat(p[(p.length/2)].income.substring(1)) + parseFloat(p[(p.length/2)].income.substring(1)) )/2
+            return ( parseFloat(p[(p.length/2)].income.substring(1)) + parseFloat(p[(p.length/2)].income.substring(1)) )/2
         } else if (p.length % 2 != 0) {
             // impair
-            median = parseFloat(p[(p.length/2)].income.substring(1))
+            return parseFloat(p[(p.length + 1)/2].income.substring(1))
         }
-        return median
     },
 
     nBOfPeopleinNorth: function(p) {
@@ -147,14 +144,100 @@ $$$$$$$$\\        $$\\           $$\\                           $$\\
 
     // closest people to Bérénice Cawt (name and id)
     closestToberenice: function(p){
-        let Berenice = p.filter( index => index.first_name == "Bérénice")
-        MrsCawt_B = Berenice.filter( index => index.last_name == "Cawt")
-        l = p.splice(MrsCawt_B[0].id, 0, )
-        return MrsCawt_B[0].id
+        // let Berenice = p.filter( index => index.first_name == "Bérénice")
+        // MrsCawt_B = Berenice.filter( index => index.last_name == "Cawt")
+        // l = p.splice(MrsCawt_B[0].id )
+
+        /* 
+        let Cawt_B = p.filter( index => index.last_name == "Cawt" && index.first_name == "Bérénice")
+        let close = []
+        p.sort((a, b) => parseFloat(b.latitude) - parseFloat(a.latitude) );
+        for(let i=0; i<p.length; i++){
+            if( p[i].latitude == Cawt_B[0].latitude ){
+                close.push(p[i-1])
+                close.push(p[i+1])
+            }
+        }
+        p.sort((a, b) => parseFloat(b.longitude) - parseFloat(a.longitude) );
+        for(let i=0; i<p.length; i++){
+            if( p[i].longitude == Cawt_B[0].longitude ){
+                close.push(p[i-1])
+                close.push(p[i+1])
+            }
+        }
+        return close
+        let Cawt_B = p.filter( index => index.last_name == "Cawt" && index.first_name == "Bérénice")
+        let close = []
+        let close2 = []
+        
+        
+        p.sort((a, b) => parseFloat(b.longitude) - parseFloat(a.longitude) );
+        p.forEach(element => {
+            if( element.longitude < Cawt_B[0].longitude + 1 && element.longitude > Cawt_B[0].longitude - 1 ){
+                close.push(element.id)
+            }
+        });
+        p.sort((a, b) => parseFloat(b.latitude) - parseFloat(a.latitude) );
+        p.forEach(element => {
+            if( element.latitude < Cawt_B[0].latitude + 0.5 && element.latitude > Cawt_B[0].latitude - 0.5 ){
+                close2.push(element.id)
+            }
+        });
+        return close
+        */
+       
+       // let B = p.filter( index => index.id == 12)
+       // lat2 = B[0].latitude
+       // lon2 = B[0].longitude
+
+       
+       
+       let Cawt_B = p.filter( index => index.last_name == "Cawt" && index.first_name == "Bérénice")
+     
+       p = p.filter( index => index.id !== 61)
+       
+        lat1 = Cawt_B[0].latitude
+        lon1 = Cawt_B[0].latitude
+        tab = []
+
+        let distance = 999999
+        let One = 0
+        let temp = 0
+
+        p.forEach(element => {
+            lat2 = element.latitude
+            lon2 = element.latitude
+            temp = getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2)
+            if  (temp  < distance){
+                distance = temp
+                One = element
+            }
+        });
+        
+        function deg2rad(deg) {
+            return deg * (Math.PI/180)
+        }
+        
+        function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+            
+            var R = 6371; // Radius of the earth in km
+            var dLat = deg2rad(lat2-lat1);  // deg2rad below
+            var dLon = deg2rad(lon2-lon1); 
+            var a = 
+            Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+            Math.sin(dLon/2) * Math.sin(dLon/2)
+            ; 
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+            var d = R * c; // Distance in km
+            return d ;
+        }
+       return  One
     },
 
 
-    /* MATCH */
+
+/* MATCH */
 
     match: function(p){
         return "not implemented".red;
