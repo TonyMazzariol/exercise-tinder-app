@@ -27,14 +27,14 @@ console.log("Nombre de personnes qui habitent dans l'hémisphère nord :",      
 console.log("Salaire moyen des personnes qui habitent dans l'hémisphère sud :",                     tr.averageSalaryInSounth(people));
 console.log(tr.line('LEVEL 3'));            
 console.log("Personne qui habite le plus près de Bérénice Cawt (nom et id) :",                      tr.closestToberenice(people));
-console.log("Personne qui habite le plus près de Ruì Brach (nom et id) :",                          "create function".blue);
-console.log("les 10 personnes qui habite les plus près de Josée Boshard (nom et id) :",              "create function".blue);
-console.log("Les noms et ids des 23 personnes qui travaillent chez google :",                       "create function".blue);
-console.log("Personne la plus agée :",                                                              "create function".blue);
-console.log("Personne la plus jeune :",                                                             "create function".blue);
-console.log("Moyenne des différences d'age :",                                                      "create function".blue);
+console.log("Personne qui habite le plus près de Ruì Brach (nom et id) :",                          tr.closestToRuì(people));
+console.log("les 10 personnes qui habite les plus près de Josée Boshard (nom et id) :",             tr.tenClosestToJosee(people));
+console.log("Les noms et ids des 23 personnes qui travaillent chez google :",                       tr.googleWorker(people));
+console.log("Personne la plus agée :",                                                              tr.oldestPersonn(people));
+console.log("Personne la plus jeune :",                                                             tr.youngestPersonn(people));
+console.log("Moyenne des différences d'age :",                                                      tr.averageAge(people));
 console.log(tr.line('LEVEL 4'));            
-console.log("Genre de film le plus populaire :",                                                    "create function".blue);
+console.log("Genre de film le plus populaire :",                                                    tr.mostPopuMovieGenre(people));
 console.log("Genres de film par ordre de popularité :",                                             "create function".blue);
 console.log("Liste des genres de film et nombre de personnes qui les préfèrent :",                  "create function".blue);
 console.log("Age moyen des hommes qui aiment les films noirs :",                                    "create function".blue);
@@ -48,7 +48,6 @@ console.log(tr.line('MATCH'));
 On match les gens avec ce qu'ils cherchent (homme ou femme).
 On prend en priorité ceux qui sont les plus proches.
 Puis ceux qui ont le plus de goût en commun.
-Pour les couples hétéroséxuel on s'assure que la femme gagne au moins 10% de moins que l'homme mais plus de la moitié.
 Les gens qui travaillent chez google ne peuvent qu'être en couple entre eux.
 Quelqu'un qui n'aime pas les Drama ne peux pas être en couple avec quelqu'un qui les aime.
 Quelqu'un qui aime les films d'aventure doit forcement être en couple avec quelqu'un qui aime aussi les films d'aventure.
