@@ -1,4 +1,4 @@
-const { indexOf, includes, forEach } = require("./people")
+const { indexOf, includes, forEach, keys } = require("./people")
 
 module.exports = {
     title: function (){
@@ -303,6 +303,8 @@ $$$$$$$$\\        $$\\           $$\\                           $$\\
 
     // most popular movie genre
     mostPopuMovieGenre: function([...p]){
+        p = p.filter( index => index.pref_movie !== "(no genres listed)")
+    
         let tab = []
         let tab2 = []
         let a = 0
@@ -316,23 +318,70 @@ $$$$$$$$\\        $$\\           $$\\                           $$\\
                 tab2.push(a)
             }           
         }
-        let b = ""
-        let c = ""
-        let array = ["Hello"]
-
-        for (let i = 0; i < tab2.length; i++) {
-            c = tab2[i]
-            for (let u = 0; u < array.length; u++) {
-                b = array[u]
-                if ( c !== b ){
-                    array.push(c)
-                    break
-                }                
-            }
+        const set = new Set(tab2)
+        const counts = {};
+    
+        for (const num of tab2) {
+            counts[num] = counts[num] ? counts[num] + 1 : 1;
         }
 
-        return array
+        let mostPopularMovieGenre = 0
+
+        for (let key in counts) {
+            if (counts[key] > mostPopularMovieGenre) {
+                mostPopularMovieGenre = key
+            }
+        };
+        return (mostPopularMovieGenre).yellow
+
     }, 
+
+    //Genres de film par ordre de popularité :
+    OrderMoviePopularGenre: function([...p]){
+        // p = p.filter( index => index.pref_movie !== "(no genres listed)")
+    
+        // let tab = []
+        // let tab2 = []
+        // let a = 0
+        // for (let i = 0; i < p.length; i++) {
+        //     p[i].pref_movie = (p[i].pref_movie.split('|'))
+        //     tab.push(p[i].pref_movie)
+        // }
+        // for (let i = 0; i < tab.length; i++) {
+        //     for (let u = 0; u < tab[i].length; u++) {
+        //         a = tab[i][u]
+        //         tab2.push(a)
+        //     }           
+        // }
+        // const set = new Set(tab2)
+        // const counts = {};
+    
+        // for (const num of tab2) {
+        //     counts[num] = counts[num] ? counts[num] + 1 : 1;
+        // }
+
+        // let mostPopularMovieGenre = 0
+
+        // for (let key in counts) {
+        //     if (counts[key] > mostPopularMovieGenre) {
+        //         mostPopularMovieGenre = key
+        //     }
+        // };
+
+        // var tab = []
+        
+        // for (var vehicle in counts) {
+        //     tab.push([vehicle, counts[vehicle]]);
+        // }
+
+        // tab.sort(function(a, b) {
+        //     return b[1] - a[1];
+        // });
+        // return tab
+        return true
+    },
+
+    
 
 /* MATCH */
 

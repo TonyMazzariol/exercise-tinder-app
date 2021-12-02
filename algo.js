@@ -35,7 +35,7 @@ console.log("Personne la plus jeune :",                                         
 console.log("Moyenne des différences d'age :",                                                      tr.averageAge(people));
 console.log(tr.line('LEVEL 4'));            
 console.log("Genre de film le plus populaire :",                                                    tr.mostPopuMovieGenre(people));
-console.log("Genres de film par ordre de popularité :",                                             "create function".blue);
+console.log("Genres de film par ordre de popularité :",                                             tr.OrderMoviePopularGenre(people));
 console.log("Liste des genres de film et nombre de personnes qui les préfèrent :",                  "create function".blue);
 console.log("Age moyen des hommes qui aiment les films noirs :",                                    "create function".blue);
 console.log(`Age moyen des femmes qui aiment les films noirs, habitent sur le fuseau horaire 
