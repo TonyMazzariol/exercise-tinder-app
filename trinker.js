@@ -170,6 +170,26 @@ $$$$$$$$\\        $$\\           $$\\                           $$\\
        return  (closestPerson.last_name+" "+closestPerson.first_name+" id : "+closestPerson.id).yellow
     },
 
+    closestPerson2: function(p, person){
+        let men = this.allMale(p)
+        men = men.filter( index => index.looking_for === "M")
+
+        // tab = []
+        let distance = 999999
+        let closestPerson = 0
+        let temp = 0
+
+        men.forEach(element => { 
+            temp = this.getDistanceFromLatLonInKm(person, element)
+            // tab.push(temp.toFixed(2))
+            if  (temp  < distance  ){
+                distance = temp
+                closestPerson = element
+            }
+        });
+       return closestPerson
+    },
+
     // closest people to Bérénice Cawt (name and id)
     closestToberenice: function(p){        
         let person = p.filter( index => index.last_name == "Cawt" && index.first_name == "Bérénice")
@@ -177,56 +197,28 @@ $$$$$$$$\\        $$\\           $$\\                           $$\\
     },
 
     // closest people to Ruì Brach(name and id)
-    // closestToRuì: function(p){        
-    //     let Brach_R = p.filter( index => index.last_name == "Brach" && index.first_name == "Ruì")
-     
-    //     p = p.filter( index => index.id !== Brach_R[0].id)
-       
-    //     lat1 = parseFloat(Brach_R[0].latitude) 
-    //     lon1 = parseFloat(Brach_R[0].longitude) 
-        
-    //     tab = []
-    //     let distance = 999999
-    //     let closestPerson = 0
-    //     let temp = 0
-
-    //     p.forEach(element => {
-    //         lat2 = parseFloat(element.latitude) 
-    //         lon2 = parseFloat(element.longitude) 
-    //         temp = this.getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2)
-    //         tab.push(temp.toFixed(2))
-    //         if  (temp  < distance){
-    //             distance = temp
-    //             closestPerson = element
-    //         }
-    //     });
-    //    return  (closestPerson.last_name+" "+closestPerson.first_name+" id : "+closestPerson.id).yellow
-    // },
+    closestToRuì: function(p){    
+        let person = p.filter( index => index.last_name == "Brach" && index.first_name == "Ruì")
+        return this.closestPerson(p, person)
+    },
 
     //les 10 personnes qui habite les plus près de Josée Boshard
-    // tenClosestToJosee: function(p){        
-    //     let Boshard_J = p.filter( index => index.last_name == "Boshard" && index.first_name == "Josée")
+    tenClosestToJosee: function(p){        
+        let person = p.filter( index => index.last_name == "Boshard" && index.first_name == "Josée")
      
-    //     p = p.filter( index => index.id !== Boshard_J[0].id)
-       
-    //     lat1 = parseFloat(Boshard_J[0].latitude) 
-    //     lon1 = parseFloat(Boshard_J[0].longitude) 
-        
-    //     tab = []
-    //     let temp = 0
+        array = p.filter( index => index.id !== person[0].id)
 
-    //     p.forEach(element => {
-    //         lat2 = parseFloat(element.latitude) 
-    //         lon2 = parseFloat(element.longitude) 
-    //         temp = this.getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2)    
-    //         element.distance = temp 
-    //     });
-    //     p.sort((a, b) => a.distance - b.distance)
-    //     for(let i=0; i<10; i++) {
-    //         tab.push(p[i])                
-    //     }
-    //    return tab.map(name => `${name.first_name} `+`${name.last_name}`+`id : ${name.id}`)
-    // },
+        tab = []
+
+        array.forEach(element => {
+            element.distance = this.getDistanceFromLatLonInKm(person , element)     
+        });
+        array.sort((a, b) => a.distance - b.distance)
+        for(let i=0; i<10; i++) {
+            tab.push(array[i])                
+        }
+       return tab.map(name => `${name.first_name} `+`${name.last_name}`+`id : ${name.id}`)
+    },
 
     //Les noms et ids des 23 personnes qui travaillent chez google
     googleWorker: function(p){
@@ -391,13 +383,47 @@ $$$$$$$$\\        $$\\           $$\\                           $$\\
             return "There is no one."
         }      
     },
-
+    SameMovieGenre: function(a, b){
+        let tab = undefined
+        a.forEach(person => {
+            b.forEach(item => {
+                if (person === item) {
+                    tab = true
+                }   
+            });
+        });
+        return tab
+    },
     /* Homme qui cherche un homme et habite le plus proche d'un homme qui a au moins une 
     préférence de film en commun (afficher les deux et la distance entre les deux): */
     MenLookingforMen: function(p){
         let men = this.allMale(p)
         men = men.filter( index => index.looking_for === "M")
-        return men.length
+        let tableau = []
+        let answer = 0
+        let person = undefined
+        let a = []
+        let b = []
+        
+        for (let i = 0; i < men.length; i++) {
+            
+            for (let u = 0; u < men.length; u++) {
+                
+                if ((men[i]) != (men[u])) {
+                    
+                    a = (men[i].pref_movie)
+                    b = (men[u].pref_movie)
+
+                    answer = this.SameMovieGenre(a, b)
+                    
+                    if(answer) {
+                        person = men[i]
+                        if (this.closestPerson2(person, men) === b) { tableau.push(men[i].first_name+" "+men[i].pref_movie+" match "+men[u].first_name+" "+men[u].pref_movie)} 
+                    }
+                }
+            }           
+        }
+        return tableau
     },
 
 /* MATCH */

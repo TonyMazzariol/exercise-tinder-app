@@ -27,8 +27,8 @@ console.log("Nombre de personnes qui habitent dans l'hémisphère nord :",      
 console.log("Salaire moyen des personnes qui habitent dans l'hémisphère sud :",                     tr.averageSalaryInSounth(people));
 console.log(tr.line('LEVEL 3'));            
 console.log("Personne qui habite le plus près de Bérénice Cawt (nom et id) :",                      tr.closestToberenice(people));
-// console.log("Personne qui habite le plus près de Ruì Brach (nom et id) :",                          tr.closestToRuì(people));
-// console.log("les 10 personnes qui habite les plus près de Josée Boshard (nom et id) :",             tr.tenClosestToJosee(people));
+console.log("Personne qui habite le plus près de Ruì Brach (nom et id) :",                          tr.closestToRuì(people));
+console.log("les 10 personnes qui habite les plus près de Josée Boshard (nom et id) :",             tr.tenClosestToJosee(people));
 console.log("Les noms et ids des 23 personnes qui travaillent chez google :",                       tr.googleWorker(people));
 console.log("Personne la plus agée :",                                                              tr.oldestPersonn(people));
 console.log("Personne la plus jeune :",                                                             tr.youngestPersonn(people));
