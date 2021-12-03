@@ -27,8 +27,8 @@ console.log("Nombre de personnes qui habitent dans l'hémisphère nord :",      
 console.log("Salaire moyen des personnes qui habitent dans l'hémisphère sud :",                     tr.averageSalaryInSounth(people));
 console.log(tr.line('LEVEL 3'));            
 console.log("Personne qui habite le plus près de Bérénice Cawt (nom et id) :",                      tr.closestToberenice(people));
-console.log("Personne qui habite le plus près de Ruì Brach (nom et id) :",                          tr.closestToRuì(people));
-console.log("les 10 personnes qui habite les plus près de Josée Boshard (nom et id) :",             tr.tenClosestToJosee(people));
+// console.log("Personne qui habite le plus près de Ruì Brach (nom et id) :",                          tr.closestToRuì(people));
+// console.log("les 10 personnes qui habite les plus près de Josée Boshard (nom et id) :",             tr.tenClosestToJosee(people));
 console.log("Les noms et ids des 23 personnes qui travaillent chez google :",                       tr.googleWorker(people));
 console.log("Personne la plus agée :",                                                              tr.oldestPersonn(people));
 console.log("Personne la plus jeune :",                                                             tr.youngestPersonn(people));
@@ -36,12 +36,12 @@ console.log("Moyenne des différences d'age :",                                 
 console.log(tr.line('LEVEL 4'));            
 console.log("Genre de film le plus populaire :",                                                    tr.mostPopuMovieGenre(people));
 console.log("Genres de film par ordre de popularité :",                                             tr.OrderMoviePopularGenre(people));
-console.log("Liste des genres de film et nombre de personnes qui les préfèrent :",                  "create function".blue);
-console.log("Age moyen des hommes qui aiment les films noirs :",                                    "create function".blue);
+console.log("Liste des genres de film et nombre de personnes qui les préfèrent :",                  tr.OrderMoviePopularGenreAndOccurence(people));
+console.log("Age moyen des hommes qui aiment les films noirs :",                                    tr.averageAgeMenLikefilmsNoirs(people));
 console.log(`Age moyen des femmes qui aiment les films noirs, habitent sur le fuseau horaire 
-de Paris et gagnent moins que la moyenne des hommes :`,                                                 "create function".blue);
+de Paris et gagnent moins que la moyenne des hommes :`,                                              tr.averageAgewomenLikefilmsNoirsTimeZone(people));
 console.log(`Homme qui cherche un homme et habite le plus proche d'un homme qui a au moins une 
-préférence de film en commun (afficher les deux et la distance entre les deux):`,                   "create function".blue);
+préférence de film en commun (afficher les deux et la distance entre les deux):`,                   tr.MenLookingforMen(people));
 console.log("Liste des couples femmes / hommes qui ont les même préférences de films :",            "create function".blue);
 console.log(tr.line('MATCH'));
 /* 
